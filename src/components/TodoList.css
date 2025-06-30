@@ -1,135 +1,242 @@
 .todo-list-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 20px;
+    background-color: #2c2c2c;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    padding: 30px;
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
+    animation: fadeIn 0.8s ease-out;
+    color: #e0e0e0;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .title {
+    text-align: center;
+    color: #90ee90;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
   }
   
   .input-section {
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 15px;
+    margin-bottom: 25px;
   }
   
   .task-input {
     flex-grow: 1;
-    padding: 12px 15px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    font-size: 1rem;
+    padding: 14px 20px;
+    border: 1px solid #444;
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border-radius: 8px;
+    font-size: 1.05rem;
     outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .task-input::placeholder {
+    color: #999;
   }
   
   .task-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-color: #90ee90;
+    box-shadow: 0 0 0 4px rgba(144, 238, 144, 0.2);
   }
   
   .add-button {
-    padding: 12px 20px;
-    background-color: #28a745;
+    padding: 14px 25px;
+    background-color: #006400;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.2s ease;
+    font-size: 1.05rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
   
-  .add-button:hover {
-    background-color: #218838;
+  .add-button:hover:not(:disabled) {
+    background-color: #008000;
+    transform: translateY(-2px);
   }
   
   .add-button:disabled {
-    background-color: #6c757d;
+    background-color: #555;
     cursor: not-allowed;
+    opacity: 0.7;
   }
   
   .filter-section {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     justify-content: center;
+    border-bottom: 1px solid #3a3a3a;
+    padding-bottom: 20px;
   }
   
   .filter-button {
-    padding: 8px 15px;
-    border: 1px solid #007bff;
-    background-color: white;
-    color: #007bff;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border: 1px solid #006400;
+    background-color: #3a3a3a;
+    color: #90ee90;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
   
-  .filter-button:hover,
+  .filter-button:hover:not(.active) {
+    background-color: #4a4a4a;
+  }
+  
   .filter-button.active {
-    background-color: #007bff;
+    background-color: #006400;
     color: white;
+    box-shadow: 0 2px 8px rgba(0, 100, 0, 0.3);
   }
   
   .task-list {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
   
   .task-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
-    margin-bottom: 10px;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    background-color: #3a3a3a;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-height: 50px;
+  }
+  
+  .task-item:hover:not(.editing) {
+    background-color: #4a4a4a;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+  }
+  
+  .task-item.completed {
+    background-color: #2f4f4f;
+    border-color: #3c6262;
+    opacity: 0.8;
+  }
+  
+  .task-item.editing {
+    background-color: #4d4d00;
+    border-color: #666600;
+    box-shadow: 0 4px 12px rgba(102, 102, 0, 0.3);
+  }
+  
+  .task-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
   }
   
   .task-checkbox {
     margin-right: 15px;
     cursor: pointer;
-    transform: scale(1.2);
+    transform: scale(1.3);
+    accent-color: #90ee90;
+  }
+  
+  .task-item.completed .task-checkbox {
+    accent-color: #60a060;
   }
   
   .task-text {
     flex-grow: 1;
-    font-size: 1rem;
-    color: #333;
+    font-size: 1.05rem;
+    color: #e0e0e0;
     word-break: break-word;
+    cursor: pointer;
+    line-height: 1.5;
   }
   
   .task-item.completed .task-text {
     text-decoration: line-through;
-    color: #6c757d;
+    color: #a0a0a0;
+    font-style: italic;
   }
   
-  .delete-button {
-    padding: 8px 12px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
+  .edit-input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: 1px solid #90ee90;
+    background-color: #3a3a3a;
+    color: #e0e0e0;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.2s ease;
+    font-size: 1.05rem;
+    outline: none;
+    margin-left: -5px;
   }
   
-  .delete-button:hover {
-    background-color: #c82333;
+  .task-actions {
+    display: flex;
+    gap: 5px;
+    margin-left: 15px;
   }
+  
+  .action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    padding: 5px;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+  
+  .action-button:hover {
+    background-color: rgba(144, 238, 144, 0.1);
+    transform: scale(1.1);
+  }
+  
+  .edit-button { color: #90ee90; }
+  .save-button { color: #00ff00; }
+  .cancel-button { color: #ffff00; }
+  .delete-button { color: #ff6347; }
   
   .summary {
     text-align: center;
-    margin-top: 20px;
-    font-size: 1rem;
-    color: #555;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #3a3a3a;
+    font-size: 1.1rem;
+    color: #b0b0b0;
+    font-weight: 500;
   }
   
   .empty-message {
     text-align: center;
-    color: #6c757d;
-    padding: 15px;
+    color: #a0a0a0;
+    padding: 20px;
     font-style: italic;
+    font-size: 1.05rem;
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 1px solid #444;
   }

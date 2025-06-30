@@ -1,3 +1,4 @@
+// src/stores/todo.js
 import { defineStore } from 'pinia'
 
 export const useTodoStore = defineStore('todo', {
@@ -37,6 +38,14 @@ export const useTodoStore = defineStore('todo', {
       const task = this.tasks.find(task => task.id === id)
       if (task) {
         task.completed = !task.completed
+      }
+    },
+
+    // Aksi baru untuk mengedit tugas
+    editTask(id, newText) {
+      const task = this.tasks.find(task => task.id === id)
+      if (task && newText.trim() !== '') {
+        task.text = newText.trim()
       }
     }
   }
